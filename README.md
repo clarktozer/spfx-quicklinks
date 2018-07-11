@@ -1,6 +1,6 @@
 ## spfx-quicklinks
 
-This is where you include your WebPart documentation.
+SharePoint framework webpart for managing a list of quick links.
 
 ### Building the code
 
