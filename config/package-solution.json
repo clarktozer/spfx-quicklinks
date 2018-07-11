@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "spfx-quicklinks-client-side-solution",
+    "id": "a26cadbb-c47d-4515-8ed3-c01de17deaa7",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true
+  },
+  "paths": {
+    "zippedPackage": "solution/spfx-quicklinks.sppkg"
+  }
+}
