@@ -6,4 +6,5 @@ export interface IQuickLinksProps {
   iconColor: string;
   openInNewTab?: boolean;
   forceDownload?: boolean;
+  links: string[];
 }

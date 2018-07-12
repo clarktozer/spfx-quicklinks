@@ -72,3 +72,19 @@
     }
   }
 }
+
+:global {
+  .remove {
+    position: absolute;
+    right: 12px;
+    color: black;
+    z-index: 1;
+    line-height: 30px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .link-container {
+    position: relative;
+  }
+}

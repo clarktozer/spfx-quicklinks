@@ -1,3 +1,6 @@
+import { Link } from "./ILinksListState";
+
 export interface ILinksListProps {
-  label: string;
+  links: string[];
+  onChanged: (links: Link[]) => void;
 }

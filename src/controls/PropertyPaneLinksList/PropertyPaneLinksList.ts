@@ -5,6 +5,8 @@ import * as ReactDOM from 'react-dom';
 import LinksList from "./components/LinksList";
 import { ILinksListProps } from "./components/ILinksListProps";
 import { IPropertyPaneLinksListInternalProps } from "./IPropertyPaneLinksListInternalProps";
+import { autobind } from "office-ui-fabric-react";
+import { Link } from "./components/ILinksListState";
 
 export class PropertyPaneLinksList implements IPropertyPaneField<IPropertyPaneLinksListProps> {
   public type: PropertyPaneFieldType = PropertyPaneFieldType.Custom;
@@ -16,9 +18,10 @@ export class PropertyPaneLinksList implements IPropertyPaneField<IPropertyPaneLi
   constructor(targetProperty: string, properties: IPropertyPaneLinksListProps) {
     this.targetProperty = targetProperty;
     this.properties = {
-      key: properties.label,
-      label: properties.label,
-      onRender: this.onRender.bind(this)
+      key: properties.key,
+      onRender: this.onRender.bind(this),
+      links: properties.links,
+      onPropertyChange: properties.onPropertyChange
     };
   }
 
@@ -36,8 +39,14 @@ export class PropertyPaneLinksList implements IPropertyPaneField<IPropertyPaneLi
     }
 
     const element: React.ReactElement<ILinksListProps> = React.createElement(LinksList, {
-      label: this.properties.label
+      links: this.properties.links,
+      onChanged: this.onChanged
     });
     ReactDOM.render(element, elem);
+  }
+
+  @autobind
+  private onChanged(links: Link[]): void {
+    this.properties.onPropertyChange(this.targetProperty, links);
   }
 }

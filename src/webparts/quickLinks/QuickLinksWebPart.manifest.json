@@ -24,7 +24,8 @@
       "type": "Link",
       "iconColor": "#333333",
       "forceDownload": false,
-      "openInNewTab": false
+      "openInNewTab": false,
+      "links": ["a link please"]
     }
   }]
 }
