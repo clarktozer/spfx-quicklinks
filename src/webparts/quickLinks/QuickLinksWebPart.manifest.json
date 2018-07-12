@@ -20,7 +20,7 @@
     "description": { "default": "QuickLinks description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "QuickLinks"
+      "type": ""
     }
   }]
 }

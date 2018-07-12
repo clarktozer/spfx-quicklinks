@@ -1,3 +1,3 @@
 export interface IQuickLinksProps {
-  description: string;
+  type: string;
 }

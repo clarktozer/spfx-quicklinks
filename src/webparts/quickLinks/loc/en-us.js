@@ -1,7 +1,6 @@
 define([], function() {
   return {
-    "PropertyPaneDescription": "Description",
-    "BasicGroupName": "Group Name",
-    "DescriptionFieldLabel": "Description Field"
+    "PropertyPaneDescription": "Add a list of quick links or files",
+    "BasicGroupName": "Settings",
   }
 });

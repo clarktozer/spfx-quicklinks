@@ -4,24 +4,26 @@ import { Version } from '@microsoft/sp-core-library';
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneDropdown,
+  PropertyPaneCheckbox
 } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'QuickLinksWebPartStrings';
 import QuickLinks from './components/QuickLinks';
 import { IQuickLinksProps } from './components/IQuickLinksProps';
+import { PropertyPaneLinksList } from '../../controls/PropertyPaneLinksList/PropertyPaneLinksList';
 
 export interface IQuickLinksWebPartProps {
-  description: string;
+  type: string;
 }
 
 export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinksWebPartProps> {
 
   public render(): void {
-    const element: React.ReactElement<IQuickLinksProps > = React.createElement(
+    const element: React.ReactElement<IQuickLinksProps> = React.createElement(
       QuickLinks,
       {
-        description: this.properties.description
+        type: this.properties.type
       }
     );
 
@@ -32,11 +34,39 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
     ReactDom.unmountComponentAtNode(this.domElement);
   }
 
+  protected get disableReactivePropertyChanges(): boolean {
+    return true;
+  }
+
   protected get dataVersion(): Version {
     return Version.parse('1.0');
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
+    let type = this.properties.type;
+
+    let allProperties = [
+      PropertyPaneDropdown('type', {
+        label: 'Link Type',
+        options: [
+          { key: 'link', text: 'Link' },
+          { key: 'file', text: 'File' }
+        ],
+        selectedKey: 'link'
+      }),
+      PropertyPaneCheckbox('target', {
+        text: 'Open in new tab?'
+      })
+    ];
+
+    if (type == "file") {
+      allProperties.push(
+        PropertyPaneCheckbox('forceDownload', {
+          text: 'Force download?'
+        })
+      );
+    }
+
     return {
       pages: [
         {
@@ -46,9 +76,13 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
           groups: [
             {
               groupName: strings.BasicGroupName,
+              groupFields: allProperties
+            },
+            {
+              groupName: "Links",
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                new PropertyPaneLinksList("list", {
+                  label: "Links"
                 })
               ]
             }
