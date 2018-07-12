@@ -5,16 +5,28 @@ import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
   PropertyPaneDropdown,
-  PropertyPaneCheckbox
+  PropertyPaneCheckbox,
+  PropertyPaneTextField
 } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'QuickLinksWebPartStrings';
 import QuickLinks from './components/QuickLinks';
 import { IQuickLinksProps } from './components/IQuickLinksProps';
 import { PropertyPaneLinksList } from '../../controls/PropertyPaneLinksList/PropertyPaneLinksList';
+import { PropertyFieldColorPicker, PropertyFieldColorPickerStyle } from '@pnp/spfx-property-controls/lib/PropertyFieldColorPicker';
 
 export interface IQuickLinksWebPartProps {
-  type: string;
+  title: string;
+  type: LinkType;
+  iconColor: string;
+  openInNewTab?: boolean;
+  forceDownload?: boolean;
+  list: any;
+}
+
+export enum LinkType {
+  LINK = "Link",
+  FILE = "File"
 }
 
 export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinksWebPartProps> {
@@ -23,7 +35,11 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
     const element: React.ReactElement<IQuickLinksProps> = React.createElement(
       QuickLinks,
       {
-        type: this.properties.type
+        title: this.properties.title,
+        type: this.properties.type,
+        iconColor: this.properties.iconColor,
+        forceDownload: this.properties.forceDownload,
+        openInNewTab: this.properties.openInNewTab
       }
     );
 
@@ -34,32 +50,32 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
     ReactDom.unmountComponentAtNode(this.domElement);
   }
 
-  protected get disableReactivePropertyChanges(): boolean {
-    return true;
-  }
-
   protected get dataVersion(): Version {
     return Version.parse('1.0');
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
-    let type = this.properties.type;
-
+    console.log(this.properties);
     let allProperties = [
+      PropertyPaneTextField("title", {
+        value: this.properties.title,
+        label: "Title"
+      }),
       PropertyPaneDropdown('type', {
         label: 'Link Type',
-        options: [
-          { key: 'link', text: 'Link' },
-          { key: 'file', text: 'File' }
-        ],
+        options: Object.keys(LinkType).map((e)=>{
+          return {
+            key: LinkType[e], text: LinkType[e]
+          }
+        }),
         selectedKey: 'link'
       }),
-      PropertyPaneCheckbox('target', {
+      PropertyPaneCheckbox('openInNewTab', {
         text: 'Open in new tab?'
       })
     ];
 
-    if (type == "file") {
+    if (this.properties.type == LinkType.FILE) {
       allProperties.push(
         PropertyPaneCheckbox('forceDownload', {
           text: 'Force download?'
@@ -75,14 +91,29 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
           },
           groups: [
             {
-              groupName: strings.BasicGroupName,
+              groupName: "Basic Settings",
               groupFields: allProperties
+            },
+            {
+              groupName: "Styling",
+              groupFields: [
+                PropertyFieldColorPicker('iconColor', {
+                  label: 'Icon Color',
+                  selectedColor: this.properties.iconColor,
+                  onPropertyChange: this.onPropertyPaneFieldChanged.bind(this),
+                  properties: this.properties,
+                  disabled: false,
+                  alphaSliderHidden: false,
+                  style: PropertyFieldColorPickerStyle.Inline,
+                  key: 'iconColor',
+                })
+              ]
             },
             {
               groupName: "Links",
               groupFields: [
                 new PropertyPaneLinksList("list", {
-                  label: "Links"
+                  label: "Links",
                 })
               ]
             }

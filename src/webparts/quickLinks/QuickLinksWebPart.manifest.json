@@ -15,12 +15,16 @@
 
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
-    "group": { "default": "Other" },
-    "title": { "default": "QuickLinks" },
-    "description": { "default": "QuickLinks description" },
-    "officeFabricIconFontName": "Page",
+    "group": { "default": "Custom WebParts" },
+    "title": { "default": "Quick Links" },
+    "description": { "default": "Add a list of quick links or files" },
+    "officeFabricIconFontName": "Link",
     "properties": {
-      "type": ""
+      "title": "Quick Links",
+      "type": "Link",
+      "iconColor": "#333333",
+      "forceDownload": false,
+      "openInNewTab": false
     }
   }]
 }

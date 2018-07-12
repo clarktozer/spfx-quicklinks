@@ -12,10 +12,7 @@ export default class QuickLinks extends React.Component<IQuickLinksProps, {}> {
             <div className={styles.column}>
               <span className={styles.title}>Welcome to SharePoint!</span>
               <p className={styles.subTitle}>Customize SharePoint experiences using Web Parts.</p>
-              <p className={styles.description}>{escape(this.props.type)}</p>
-              <a href="https://aka.ms/spfx" className={styles.button}>
-                <span className={styles.label}>Learn more</span>
-              </a>
+              <p className={styles.description}>{escape(this.props.type)}{escape(this.props.iconColor)}</p>
             </div>
           </div>
         </div>
