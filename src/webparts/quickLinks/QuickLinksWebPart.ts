@@ -21,7 +21,7 @@ export interface IQuickLinksWebPartProps {
   type: LinkType;
   iconColor: string;
   openInNewTab?: boolean;
-  forceDownload?: boolean;
+  fontColor: string;
   initLinks: string[];
   links: Link[];
 }
@@ -39,8 +39,13 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
         title: this.properties.title,
         type: this.properties.type,
         iconColor: this.properties.iconColor,
+        fontColor: this.properties.fontColor,
         openInNewTab: this.properties.openInNewTab,
-        links: this.properties.links != null ? this.properties.links : []
+        links: this.properties.links != null ? this.properties.links : [],
+        displayMode: this.displayMode,
+        updateProperty: (value: string) => {
+          this.properties.title = value;
+        }
       }
     );
 
@@ -56,28 +61,6 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
-    let allProperties = [
-      PropertyPaneTextField("title", {
-        value: this.properties.title,
-        label: "Title",
-        onGetErrorMessage: (value) => {
-          return value.length > 3 ? "" : "longer";
-        }
-      }),
-      PropertyPaneDropdown('type', {
-        label: 'Link Type',
-        options: Object.keys(LinkType).map((e) => {
-          return {
-            key: LinkType[e], text: LinkType[e]
-          };
-        }),
-        selectedKey: 'link'
-      }),
-      PropertyPaneCheckbox('openInNewTab', {
-        text: 'Open in new tab?'
-      })
-    ];
-
     return {
       pages: [
         {
@@ -87,7 +70,20 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
           groups: [
             {
               groupName: "Basic Settings",
-              groupFields: allProperties
+              groupFields: [
+                PropertyPaneDropdown('type', {
+                  label: 'Link Type',
+                  options: Object.keys(LinkType).map((e) => {
+                    return {
+                      key: LinkType[e], text: LinkType[e]
+                    };
+                  }),
+                  selectedKey: 'link'
+                }),
+                PropertyPaneCheckbox('openInNewTab', {
+                  text: 'Open in new tab?'
+                })
+              ]
             },
             {
               groupName: "Styling",
@@ -100,7 +96,17 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
                   disabled: false,
                   alphaSliderHidden: false,
                   style: PropertyFieldColorPickerStyle.Inline,
-                  key: 'iconColor',
+                  key: 'iconColor'
+                }),
+                PropertyFieldColorPicker('fontColor', {
+                  label: 'Font Color',
+                  selectedColor: this.properties.fontColor,
+                  onPropertyChange: this.onPropertyPaneFieldChanged.bind(this),
+                  properties: this.properties,
+                  disabled: false,
+                  alphaSliderHidden: false,
+                  style: PropertyFieldColorPickerStyle.Inline,
+                  key: 'fontColor'
                 })
               ]
             },

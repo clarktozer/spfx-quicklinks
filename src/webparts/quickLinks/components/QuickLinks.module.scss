@@ -35,4 +35,14 @@
     padding-right: 5px;
     line-height: 20px;
   }
+
+  .link-row {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .link {
+    text-decoration: none;
+  }
 }

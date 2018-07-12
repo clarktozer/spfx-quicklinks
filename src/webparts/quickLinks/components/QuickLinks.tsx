@@ -3,6 +3,7 @@ import styles from './QuickLinks.module.scss';
 import { IQuickLinksProps } from './IQuickLinksProps';
 import { autobind } from '@uifabric/utilities';
 import { LinkType } from '../QuickLinksWebPart';
+import { WebPartTitle } from "@pnp/spfx-controls-react/lib/WebPartTitle";
 
 export default class QuickLinks extends React.Component<IQuickLinksProps, {}> {
 
@@ -26,6 +27,9 @@ export default class QuickLinks extends React.Component<IQuickLinksProps, {}> {
         <div>
           <div className="ms-Grid-row">
             <div className="ms-Grid-col ms-sm12">
+              <WebPartTitle displayMode={this.props.displayMode}
+                title={this.props.title}
+                updateProperty={this.props.updateProperty} />
               {
                 this.props.links.map((e, i) => {
                   let linkProps = {
@@ -35,11 +39,9 @@ export default class QuickLinks extends React.Component<IQuickLinksProps, {}> {
                   if (this.props.openInNewTab) {
                     linkProps["target"] = "_blank";
                   }
-                  return <div key={this.props.type + "-link-" + i}>
-                    <span>
-                      <i style={{ color: this.props.iconColor }} className={"quick-link-icon ms-Icon ms-Icon--" + this.getIcon()} aria-hidden="true"></i>
-                      <a {...linkProps}>{e.label}</a>
-                    </span>
+                  return <div className="link-row" key={this.props.type + "-link-" + i}>
+                    <i style={{ color: this.props.iconColor }} className={"quick-link-icon ms-Icon ms-Icon--" + this.getIcon()} aria-hidden="true"></i>
+                    <a className="link" {...linkProps} style={{ color: this.props.fontColor }}>{e.label}</a>
                   </div>;
                 })
               }

@@ -23,6 +23,7 @@
       "title": "Quick Links",
       "type": "Link",
       "iconColor": "#333333",
+      "fontColor": "#333333",
       "openInNewTab": false,
       "links": [{
         "label": "Google",
