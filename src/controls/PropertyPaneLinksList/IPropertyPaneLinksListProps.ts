@@ -2,6 +2,7 @@ import { Link } from "./components/ILinksListState";
 
 export interface IPropertyPaneLinksListProps {
   key: string;
-  links: string[];
-  onPropertyChange: (propertyPath: string, links: Link[]) => void;
+  links: Link[];
+  onPropertyChange?: (propertyPath: string, links: Link[]) => void;
+  onGetErrorMessage?: (value: string) => string;
 }

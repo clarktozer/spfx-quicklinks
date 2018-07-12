@@ -5,4 +5,5 @@ export interface ILinksListState {
 export interface Link {
   key: string;
   value: string;
+  label: string;
 }

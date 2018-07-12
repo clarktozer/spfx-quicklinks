@@ -6,7 +6,6 @@ import LinksList from "./components/LinksList";
 import { ILinksListProps } from "./components/ILinksListProps";
 import { IPropertyPaneLinksListInternalProps } from "./IPropertyPaneLinksListInternalProps";
 import { autobind } from "office-ui-fabric-react";
-import { Link } from "./components/ILinksListState";
 
 export class PropertyPaneLinksList implements IPropertyPaneField<IPropertyPaneLinksListProps> {
   public type: PropertyPaneFieldType = PropertyPaneFieldType.Custom;
@@ -19,34 +18,22 @@ export class PropertyPaneLinksList implements IPropertyPaneField<IPropertyPaneLi
     this.targetProperty = targetProperty;
     this.properties = {
       key: properties.key,
-      onRender: this.onRender.bind(this),
-      links: properties.links,
-      onPropertyChange: properties.onPropertyChange
+      onRender: this.onRender,
+      links: properties.links
     };
   }
 
-  public render(): void {
-    if (!this.elem) {
-      return;
-    }
-
-    this.onRender(this.elem);
-  }
-
-  private onRender(elem: HTMLElement): void {
+  @autobind
+  private onRender(elem: HTMLElement, ctx?, changeCallback?: (targetProperty: string, value: any) => void): void {
     if (!this.elem) {
       this.elem = elem;
     }
 
     const element: React.ReactElement<ILinksListProps> = React.createElement(LinksList, {
       links: this.properties.links,
-      onChanged: this.onChanged
+      onChanged: changeCallback,
+      targetProperty: this.targetProperty
     });
     ReactDOM.render(element, elem);
-  }
-
-  @autobind
-  private onChanged(links: Link[]): void {
-    this.properties.onPropertyChange(this.targetProperty, links);
   }
 }

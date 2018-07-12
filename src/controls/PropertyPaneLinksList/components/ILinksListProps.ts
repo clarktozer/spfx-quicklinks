@@ -1,6 +1,7 @@
 import { Link } from "./ILinksListState";
 
 export interface ILinksListProps {
-  links: string[];
-  onChanged: (links: Link[]) => void;
+  targetProperty: string;
+  links: Link[];
+  onChanged(targetProperty: string, value: any): void;
 }

@@ -23,9 +23,11 @@
       "title": "Quick Links",
       "type": "Link",
       "iconColor": "#333333",
-      "forceDownload": false,
       "openInNewTab": false,
-      "links": ["a link please"]
+      "links": [{
+        "label": "Google",
+        "value": "http://www.google.com"
+      }]
     }
   }]
 }

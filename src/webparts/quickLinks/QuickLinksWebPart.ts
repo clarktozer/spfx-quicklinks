@@ -14,8 +14,6 @@ import QuickLinks from './components/QuickLinks';
 import { IQuickLinksProps } from './components/IQuickLinksProps';
 import { PropertyPaneLinksList } from '../../controls/PropertyPaneLinksList/PropertyPaneLinksList';
 import { PropertyFieldColorPicker, PropertyFieldColorPickerStyle } from '@pnp/spfx-property-controls/lib/PropertyFieldColorPicker';
-import { get, update } from '@microsoft/sp-lodash-subset';
-import { autobind } from 'office-ui-fabric-react';
 import { Link } from '../../controls/PropertyPaneLinksList/components/ILinksListState';
 
 export interface IQuickLinksWebPartProps {
@@ -24,14 +22,14 @@ export interface IQuickLinksWebPartProps {
   iconColor: string;
   openInNewTab?: boolean;
   forceDownload?: boolean;
-  links: string[];
+  initLinks: string[];
+  links: Link[];
 }
 
 export enum LinkType {
   LINK = "Link",
   FILE = "File"
 }
-
 export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinksWebPartProps> {
 
   public render(): void {
@@ -41,18 +39,13 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
         title: this.properties.title,
         type: this.properties.type,
         iconColor: this.properties.iconColor,
-        forceDownload: this.properties.forceDownload,
         openInNewTab: this.properties.openInNewTab,
-        links: this.properties.links
+        links: this.properties.links != null ? this.properties.links : []
       }
     );
 
     ReactDom.render(element, this.domElement);
   }
-
-  // protected get disableReactivePropertyChanges(): boolean {
-  //   return true;
-  // }
 
   protected onDispose(): void {
     ReactDom.unmountComponentAtNode(this.domElement);
@@ -62,29 +55,21 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
     return Version.parse('1.0');
   }
 
-  @autobind
-  private onLinksChange(propertyPath: string, links: Link[]): void {
-    update(this.properties, propertyPath, (): any => {
-      return links.map((e)=>{
-        return e.value;
-      });
-    });
-    this.render();
-  }
-
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
-    console.log(this.properties);
     let allProperties = [
       PropertyPaneTextField("title", {
         value: this.properties.title,
-        label: "Title"
+        label: "Title",
+        onGetErrorMessage: (value) => {
+          return value.length > 3 ? "" : "longer";
+        }
       }),
       PropertyPaneDropdown('type', {
         label: 'Link Type',
         options: Object.keys(LinkType).map((e) => {
           return {
             key: LinkType[e], text: LinkType[e]
-          }
+          };
         }),
         selectedKey: 'link'
       }),
@@ -92,14 +77,6 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
         text: 'Open in new tab?'
       })
     ];
-
-    if (this.properties.type == LinkType.FILE) {
-      allProperties.push(
-        PropertyPaneCheckbox('forceDownload', {
-          text: 'Force download?'
-        })
-      );
-    }
 
     return {
       pages: [
@@ -132,8 +109,7 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
               groupFields: [
                 new PropertyPaneLinksList("links", {
                   key: "links",
-                  links: this.properties.links,
-                  onPropertyChange: this.onLinksChange
+                  links: this.properties.links
                 })
               ]
             }
