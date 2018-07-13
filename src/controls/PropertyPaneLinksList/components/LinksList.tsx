@@ -3,6 +3,7 @@ import { ILinksListProps } from "./ILinksListProps";
 import { ILinksListState, Link } from "./ILinksListState";
 import { DefaultButton, TextField, Label } from "office-ui-fabric-react";
 import { autobind } from "@uifabric/utilities";
+import * as strings from 'QuickLinksWebPartStrings';
 
 export default class LinksList extends React.Component<ILinksListProps, ILinksListState> {
   constructor(props: ILinksListProps, state: ILinksListState) {
@@ -65,26 +66,26 @@ export default class LinksList extends React.Component<ILinksListProps, ILinksLi
   }
 
   public render() {
-    return <div>
+    return <div className="linkListPropertyPane">
       <DefaultButton onClick={this.onAddLink}>Add</DefaultButton>
       {
         this.state.links != null ?
           this.state.links.map((e, i) => {
-            return <div className="link-container" key={"link-container" + i}>
-              <i title="Delete Link" className={"remove ms-Icon ms-Icon--ChromeClose"} aria-hidden="true" onClick={() => this.onRemove(e.key)}></i>
-              <Label>{"Link"}</Label>
+            return <div className="linkContainer" key={"link-container" + i}>
+              <i title={strings.DeleteLinkHover} className={"remove ms-Icon ms-Icon--ChromeClose"} aria-hidden="true" onClick={() => this.onRemove(e.key)}></i>
+              <Label>{strings.Link}</Label>
               <TextField
-                className="link-label"
+                className="linkLabel"
                 key={e.key + "-title"}
                 value={e.label}
-                placeholder="Enter label here..."
+                placeholder={strings.LinkLabelPlaceholder}
                 onChanged={(value) => this.onChanged(value, "label", i)}
               />
               <TextField
-                className="list-link"
+                className="listLink"
                 key={e.key}
                 value={e.value}
-                placeholder="Enter link here..."
+                placeholder={strings.LinkPlaceholder}
                 onChanged={(value) => this.onChanged(value, "value", i)}
               />
             </div>;

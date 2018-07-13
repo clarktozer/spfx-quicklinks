@@ -1,48 +1,43 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 .quickLinks {
-  .container {
-    max-width: 700px;
-    margin: 0px auto; // box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
-  }
-}
-
-:global {
-  .remove {
-    position: absolute;
-    right: 5px;
-    color: #000;
-    z-index: 1;
-    line-height: 28.8px;
-    font-size: 10px;
-    cursor: pointer;
-  }
-  .link-container {
-    position: relative;
-    margin-bottom: 5px;
-    margin-top: 5px;
-  }
-  .list-link {
-    input {
-      padding-right: 36px;
-    }
-  }
-  .link-label {
-    padding-bottom: 5px;
-  }
-
-  .quick-link-icon {
+  .quickLinkIcon {
     vertical-align: middle;
     padding-right: 5px;
     line-height: 20px;
   }
-
-  .link-row {
+  .linkRow {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-
   .link {
     text-decoration: none;
+  }
+}
+
+:global {
+  .linkListPropertyPane {
+    .remove {
+      position: absolute;
+      right: 5px;
+      color: #000;
+      z-index: 1;
+      line-height: 28.8px;
+      font-size: 10px;
+      cursor: pointer;
+    }
+    .linkContainer {
+      position: relative;
+      margin-bottom: 5px;
+      margin-top: 5px;
+    }
+    .listLink {
+      input {
+        padding-right: 36px;
+      }
+    }
+    .linkLabel {
+      padding-bottom: 5px;
+    }
   }
 }

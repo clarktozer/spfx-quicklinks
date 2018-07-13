@@ -67,10 +67,10 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
           },
           groups: [
             {
-              groupName: "Basic Settings",
+              groupName: strings.BasicGroupName,
               groupFields: [
                 PropertyPaneDropdown('type', {
-                  label: 'Link Type',
+                  label: strings.LinkType,
                   options: Object.keys(LinkType).map((e) => {
                     return {
                       key: LinkType[e], text: LinkType[e]
@@ -79,15 +79,15 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
                   selectedKey: 'link'
                 }),
                 PropertyPaneCheckbox('openInNewTab', {
-                  text: 'Open in new tab?'
+                  text: strings.OpenInNewTab
                 })
               ]
             },
             {
-              groupName: "Styling",
+              groupName: strings.StylingGroup,
               groupFields: [
                 PropertyFieldColorPicker('iconColor', {
-                  label: 'Icon Color',
+                  label: strings.IconColor,
                   selectedColor: this.properties.iconColor,
                   onPropertyChange: this.onPropertyPaneFieldChanged.bind(this),
                   properties: this.properties,
@@ -97,7 +97,7 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
                   key: 'iconColor'
                 }),
                 PropertyFieldColorPicker('fontColor', {
-                  label: 'Font Color',
+                  label: strings.FontColor,
                   selectedColor: this.properties.fontColor,
                   onPropertyChange: this.onPropertyPaneFieldChanged.bind(this),
                   properties: this.properties,
@@ -109,7 +109,7 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
               ]
             },
             {
-              groupName: "Links",
+              groupName: strings.LinksGroup,
               groupFields: [
                 new PropertyPaneLinksList("links", {
                   key: "links",

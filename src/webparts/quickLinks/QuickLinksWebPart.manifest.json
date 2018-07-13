@@ -17,7 +17,7 @@
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
     "group": { "default": "Custom WebParts" },
     "title": { "default": "Quick Links" },
-    "description": { "default": "Add a list of quick links or files" },
+    "description": { "default": "Add a list of quick links" },
     "officeFabricIconFontName": "Link",
     "properties": {
       "title": "Quick Links",
