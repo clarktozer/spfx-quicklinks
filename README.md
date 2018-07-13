@@ -2,6 +2,8 @@
 
 SharePoint framework webpart for managing a list of quick links.
 
+![Quick Links](./demo.gif)
+
 ### Building the code
 
 ```bash
