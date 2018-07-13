@@ -5,9 +5,7 @@ import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
   PropertyPaneDropdown,
-  PropertyPaneCheckbox,
-  PropertyPaneTextField
-} from '@microsoft/sp-webpart-base';
+  PropertyPaneCheckbox} from '@microsoft/sp-webpart-base';
 
 import * as strings from 'QuickLinksWebPartStrings';
 import QuickLinks from './components/QuickLinks';

@@ -4,8 +4,25 @@ import { IQuickLinksProps } from './IQuickLinksProps';
 import { autobind } from '@uifabric/utilities';
 import { LinkType } from '../QuickLinksWebPart';
 import { WebPartTitle } from "@pnp/spfx-controls-react/lib/WebPartTitle";
+import Radium from 'radium'
+import * as tinycolor from 'tinycolor2'
 
+@Radium
 export default class QuickLinks extends React.Component<IQuickLinksProps, {}> {
+  inlineStyles: any;
+  constructor(props: IQuickLinksProps) {
+    super(props);
+  }
+
+  @autobind
+  private createLinkStyle(hoverColor) {
+    return {
+      color: this.props.fontColor,
+      ':hover': {
+        color: tinycolor(hoverColor).darken(25).toString()
+      }
+    }
+  }
 
   @autobind
   public getIcon() {
@@ -21,7 +38,9 @@ export default class QuickLinks extends React.Component<IQuickLinksProps, {}> {
   }
 
   public render(): React.ReactElement<IQuickLinksProps> {
-    console.log(this.props);
+    this.inlineStyles = {
+      link: this.createLinkStyle(this.props.fontColor)
+    }
     return (
       <div className={"ms-Grid " + styles.quickLinks}>
         <div>
@@ -41,7 +60,7 @@ export default class QuickLinks extends React.Component<IQuickLinksProps, {}> {
                   }
                   return <div className="link-row" key={this.props.type + "-link-" + i}>
                     <i style={{ color: this.props.iconColor }} className={"quick-link-icon ms-Icon ms-Icon--" + this.getIcon()} aria-hidden="true"></i>
-                    <a className="link" {...linkProps} style={{ color: this.props.fontColor }}>{e.label}</a>
+                    <a className="link" {...linkProps} style={this.inlineStyles.link}>{e.label}</a>
                   </div>;
                 })
               }
