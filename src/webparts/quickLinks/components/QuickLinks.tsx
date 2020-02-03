@@ -57,6 +57,7 @@ export default class QuickLinks extends React.Component<IQuickLinksProps, {}> {
                   };
                   if (this.props.openInNewTab) {
                     linkProps["target"] = "_blank";
+                    linkProps["data-interception"] = "off";
                   }
                   return <div className={styles.linkRow} key={this.props.type + "-link-" + i}>
                     <i style={{ color: this.props.iconColor }} className={styles.quickLinkIcon + " ms-Icon ms-Icon--" + this.getIcon()} aria-hidden="true"></i>
