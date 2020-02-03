@@ -13,6 +13,7 @@ import { IQuickLinksProps } from './components/IQuickLinksProps';
 import { PropertyPaneLinksList } from '../../controls/PropertyPaneLinksList/PropertyPaneLinksList';
 import { PropertyFieldColorPicker, PropertyFieldColorPickerStyle } from '@pnp/spfx-property-controls/lib/PropertyFieldColorPicker';
 import { Link } from '../../controls/PropertyPaneLinksList/components/ILinksListState';
+import '../../styles/polyfill.css';
 
 export interface IQuickLinksWebPartProps {
   title: string;
