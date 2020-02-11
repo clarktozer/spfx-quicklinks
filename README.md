@@ -1,8 +1,6 @@
 ## spfx-quicklinks
 
-SharePoint framework webpart for managing a list of quick links.
-
-![Quick Links](./demo.gif)
+This is where you include your WebPart documentation.
 
 ### Building the code
 
@@ -15,14 +13,14 @@ gulp
 
 This package produces the following:
 
-* lib/* - intermediate-stage commonjs build artifacts
-* dist/* - the bundled script, along with other resources
-* deploy/* - all resources which should be uploaded to a CDN.
+-   lib/\* - intermediate-stage commonjs build artifacts
+-   dist/\* - the bundled script, along with other resources
+-   deploy/\* - all resources which should be uploaded to a CDN.
 
 ### Build options
 
-gulp clean
-gulp test
-gulp serve
-gulp bundle
-gulp package-solution
+gulp clean - TODO
+gulp test - TODO
+gulp serve - TODO
+gulp bundle - TODO
+gulp package-solution - TODO

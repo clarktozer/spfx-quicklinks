@@ -1,12 +1,14 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
-  "solution": {
-    "name": "spfx-quicklinks-client-side-solution",
-    "id": "a26cadbb-c47d-4515-8ed3-c01de17deaa7",
-    "version": "1.0.0.0",
-    "includeClientSideAssets": true
-  },
-  "paths": {
-    "zippedPackage": "solution/spfx-quicklinks.sppkg"
-  }
+    "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+    "solution": {
+        "name": "spfx-quicklinks-client-side-solution",
+        "id": "7dbd68ed-03f2-4a3f-89aa-86277fd6f1af",
+        "version": "1.0.0.0",
+        "includeClientSideAssets": true,
+        "skipFeatureDeployment": true,
+        "isDomainIsolated": false
+    },
+    "paths": {
+        "zippedPackage": "solution/spfx-quicklinks.sppkg"
+    }
 }

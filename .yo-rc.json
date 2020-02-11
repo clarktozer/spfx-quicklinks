@@ -1,11 +1,12 @@
 {
-  "@microsoft/generator-sharepoint": {
-    "isCreatingSolution": true,
-    "environment": "spo",
-    "version": "1.5.1",
-    "libraryName": "spfx-quicklinks",
-    "libraryId": "a26cadbb-c47d-4515-8ed3-c01de17deaa7",
-    "packageManager": "npm",
-    "componentType": "webpart"
-  }
+    "@microsoft/generator-sharepoint": {
+        "isCreatingSolution": true,
+        "environment": "spo",
+        "version": "1.10.0",
+        "libraryName": "spfx-quicklinks",
+        "libraryId": "7dbd68ed-03f2-4a3f-89aa-86277fd6f1af",
+        "packageManager": "npm",
+        "isDomainIsolated": false,
+        "componentType": "webpart"
+    }
 }
