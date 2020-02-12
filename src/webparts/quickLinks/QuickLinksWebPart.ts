@@ -8,7 +8,7 @@ import * as strings from "QuickLinksWebPartStrings";
 import * as React from "react";
 import * as ReactDom from "react-dom";
 import { IQuickLinksProps } from "./components/IQuickLinksProps";
-import QuickLinks from "./components/QuickLinks";
+import { QuickLinks } from "./components/QuickLinks";
 
 export interface IQuickLinksWebPartProps {
     description: string;
