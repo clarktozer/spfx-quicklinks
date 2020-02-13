@@ -1,31 +1,15 @@
 import { Version } from "@microsoft/sp-core-library";
-import {
-    IPropertyPaneConfiguration,
-    PropertyPaneTextField
-} from "@microsoft/sp-property-pane";
+import { IPropertyPaneConfiguration, PropertyPaneTextField } from "@microsoft/sp-property-pane";
 import { BaseClientSideWebPart } from "@microsoft/sp-webpart-base";
 import * as strings from "QuickLinksWebPartStrings";
 import * as React from "react";
 import * as ReactDom from "react-dom";
-import { IQuickLinksProps } from "./components/IQuickLinksProps";
+import { IQuickLinksProps } from "../models";
 import { QuickLinks } from "./components/QuickLinks";
 
-export interface IQuickLinksWebPartProps {
-    description: string;
-}
-
-export default class QuickLinksWebPart extends BaseClientSideWebPart<
-    IQuickLinksWebPartProps
-> {
+export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinksProps> {
     public render(): void {
-        const element: React.ReactElement<IQuickLinksProps> = React.createElement(
-            QuickLinks,
-            {
-                description: this.properties.description
-            }
-        );
-
-        ReactDom.render(element, this.domElement);
+        ReactDom.render(<QuickLinks {...this.properties} />, this.domElement);
     }
 
     protected onDispose(): void {
