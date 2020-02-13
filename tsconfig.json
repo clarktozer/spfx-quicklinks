@@ -18,6 +18,6 @@
         "types": ["es6-promise", "webpack-env"],
         "lib": ["es5", "dom", "es2015.collection"]
     },
-    "include": ["src/**/*.ts"],
+    "include": ["src/**/*.ts", "src/**/*.tsx"],
     "exclude": ["node_modules", "lib"]
 }
