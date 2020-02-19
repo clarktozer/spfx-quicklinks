@@ -1,5 +1,5 @@
 import { Version } from "@microsoft/sp-core-library";
-import { IPropertyPaneConfiguration, PropertyPaneTextField } from "@microsoft/sp-property-pane";
+import { IPropertyPaneConfiguration } from "@microsoft/sp-property-pane";
 import { BaseClientSideWebPart } from "@microsoft/sp-webpart-base";
 import * as strings from "QuickLinksWebPartStrings";
 import * as React from "react";
@@ -30,11 +30,7 @@ export default class QuickLinksWebPart extends BaseClientSideWebPart<IQuickLinks
                     groups: [
                         {
                             groupName: strings.BasicGroupName,
-                            groupFields: [
-                                PropertyPaneTextField("description", {
-                                    label: strings.DescriptionFieldLabel
-                                })
-                            ]
+                            groupFields: []
                         }
                     ]
                 }
